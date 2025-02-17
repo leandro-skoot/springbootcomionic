@@ -1,4 +1,4 @@
-package com.leandroskoot.cursomc.services;
+	package com.leandroskoot.cursomc.services;
 
 import java.util.Optional;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.leandroskoot.cursomc.domain.Categoria;
 import com.leandroskoot.cursomc.repositories.CategoriaRepository;
+import com.leandroskoot.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -16,8 +17,8 @@ public class CategoriaService {
 	
 	public Categoria buscar(Integer id) {
 		 Optional<Categoria> obj = repo.findById(id);
-		return obj.orElse(null);
-		
-	}
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+		 "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+		} 
 
 }
