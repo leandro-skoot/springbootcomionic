@@ -1,6 +1,9 @@
 package com.leandroskoot.cursomc.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -9,6 +12,7 @@ import jakarta.persistence.Entity;
 public class ItemPedido implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
     @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
 
@@ -28,6 +32,7 @@ public class ItemPedido implements Serializable {
         this.preco = preco;
     }
 
+    @JsonIgnore
     public Pedido getPedido() {
         return id.getPedido();
     }
@@ -69,27 +74,19 @@ public class ItemPedido implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        ItemPedido other = (ItemPedido) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ItemPedido other = (ItemPedido) obj;
+		return Objects.equals(id, other.id);
+	}
 }
