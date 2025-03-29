@@ -17,7 +17,6 @@ import com.leandroskoot.cursomc.domain.Endereco;
 import com.leandroskoot.cursomc.domain.enums.TipoCliente;
 import com.leandroskoot.cursomc.dto.ClienteDTO;
 import com.leandroskoot.cursomc.dto.ClienteNewDTO;
-import com.leandroskoot.cursomc.repositories.CidadeRepository;
 import com.leandroskoot.cursomc.repositories.ClienteRepository;
 import com.leandroskoot.cursomc.repositories.EnderecoRepository;
 import com.leandroskoot.cursomc.services.exceptions.DateIntegrityException;
@@ -28,9 +27,6 @@ public class ClienteService {
 
 	@Autowired
 	private ClienteRepository repo;
-	
-	@Autowired
-	private CidadeRepository cidadeRepository;
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
@@ -60,7 +56,7 @@ public class ClienteService {
 		try {
 			repo.deleteById(id);			
 		}catch (DataIntegrityViolationException e) {
-			throw new DateIntegrityException("Não é possível excluir porque há entidades relacionadas");
+			throw new DateIntegrityException("Não é possível excluir porque há pedidos relacionadas");
 		}	
 	}
 	public List<Cliente> findAll(){
