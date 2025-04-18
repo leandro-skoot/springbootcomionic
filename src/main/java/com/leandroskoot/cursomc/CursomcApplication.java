@@ -2,10 +2,12 @@ package com.leandroskoot.cursomc;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import com.leandroskoot.cursomc.domain.Categoria;
 import com.leandroskoot.cursomc.domain.Cidade;
 import com.leandroskoot.cursomc.domain.Cliente;
