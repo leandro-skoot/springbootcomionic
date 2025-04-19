@@ -10,75 +10,79 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class ItemPedido implements Serializable {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @JsonIgnore
-    @EmbeddedId
-    private ItemPedidoPK id = new ItemPedidoPK();
+	@JsonIgnore
+	@EmbeddedId
+	private ItemPedidoPK id = new ItemPedidoPK();
 
-    private Double desconto;
-    private Integer quantidade;
-    private Double preco;
+	private Double desconto;
+	private Integer quantidade;
+	private Double preco;
 
-    public ItemPedido() {
-    }
+	public ItemPedido() {
+	}
 
-    public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade, Double preco) {
-        super();
-        id.setPedido(pedido);
-        id.setProduto(produto);
-        this.desconto = desconto;
-        this.quantidade = quantidade;
-        this.preco = preco;
-    }
+	public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade, Double preco) {
+		super();
+		id.setPedido(pedido);
+		id.setProduto(produto);
+		this.desconto = desconto;
+		this.quantidade = quantidade;
+		this.preco = preco;
+	}
 
-    @JsonIgnore
-    public Pedido getPedido() {
-        return id.getPedido();
-    }
+	public double getSubTotal() {
+		return (preco - desconto) * quantidade;
+	}
 
-    public Produto getProduto() {
-        return id.getProduto();
-    }
+	@JsonIgnore
+	public Pedido getPedido() {
+		return id.getPedido();
+	}
 
-    public ItemPedidoPK getId() {
-        return id;
-    }
+	public Produto getProduto() {
+		return id.getProduto();
+	}
 
-    public void setId(ItemPedidoPK id) {
-        this.id = id;
-    }
+	public ItemPedidoPK getId() {
+		return id;
+	}
 
-    public Double getDesconto() {
-        return desconto;
-    }
+	public void setId(ItemPedidoPK id) {
+		this.id = id;
+	}
 
-    public void setDesconto(Double desconto) {
-        this.desconto = desconto;
-    }
+	public Double getDesconto() {
+		return desconto;
+	}
 
-    public Integer getQuantidade() {
-        return quantidade;
-    }
+	public void setDesconto(Double desconto) {
+		this.desconto = desconto;
+	}
 
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
+	public Integer getQuantidade() {
+		return quantidade;
+	}
 
-    public Double getPreco() {
-        return preco;
-    }
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
 
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
+	public Double getPreco() {
+		return preco;
+	}
 
-    @Override
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
 
-    @Override
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
