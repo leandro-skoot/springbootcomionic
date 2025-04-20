@@ -17,28 +17,28 @@ import com.leandroskoot.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class PedidoService {
-	
+
 	@Autowired
 	private PedidoRepository repo;
-	
+
 	@Autowired
 	private BoletoService boletoService;
-	
+
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
-	
+
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
-	
+
 	@Autowired
 	private ProdutoService produtoService;
-	
+
 	public Pedido find(Integer id) {
 		Optional<Pedido> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
 	}
-	
+
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
